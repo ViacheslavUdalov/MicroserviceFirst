@@ -1,11 +1,9 @@
 using System.Net;
 using MassTransit;
-using MongoDB.Driver;
-using MongoDB.Entities;using Polly;
+using Polly;
 using Polly.Extensions.Http;
 using SearchService.Consumers;
 using SearchService.Data;
-using SearchService.Models;
 using SearchService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +16,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<AuctionServiceHttpClient>().AddPolicyHandler(GetPolicy());
 builder.Services.AddMassTransit(x =>
 {
-    
     x.AddConsumersFromNamespaceContaining<AuctionCreatedConsumer>();
     x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("search", false));
     x.UsingRabbitMq((context, cfg) =>
@@ -51,8 +48,6 @@ app.Lifetime.ApplicationStarted.Register(async () =>
 );
 
 
-
-
 app.Run();
 
 static IAsyncPolicy<HttpResponseMessage> GetPolicy()
@@ -60,5 +55,3 @@ static IAsyncPolicy<HttpResponseMessage> GetPolicy()
         .HandleTransientHttpError()
         .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
         .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));
-
-

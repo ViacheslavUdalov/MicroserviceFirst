@@ -8,13 +8,6 @@
       <jdbc-url>jdbc:postgresql://localhost:5434/identity</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="auctions@localhost" uuid="ecf2e881-fc41-4856-a98f-8c541715e5d8">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5434/auctions</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="@localhost" uuid="915fdbab-5e02-4b61-ae99-30470e200550">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
